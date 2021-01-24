@@ -83,10 +83,15 @@ void Widget::onReceiveData()
 
 void Widget::connectToServer()
 {
-    //获取服务器IP和端口
+    if(tcpSocket->isOpen())
+    {
+        tcpSocket->disconnectFromHost();
+    }
+    //从界面框获取服务器IP和端口
     QString ip = ipLineEdit->text();
     qint64 port = portLineEdit->text().toInt();
     tcpSocket->connectToHost(QHostAddress(ip), port);
+    contentWnd->setText("已连接至服务器");
 }
 
 Widget::~Widget()
