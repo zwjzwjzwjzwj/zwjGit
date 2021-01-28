@@ -78,7 +78,11 @@ void Widget::onReadyRead()
             receiveSize = receiveSize + file.write(fileByte);
             if(receiveSize == m_nFileSize)
             {
+
                 file.close();
+                QMessageBox::information(this, "接收提示", "文件接收完毕", QMessageBox::Yes);
+                isStart = true;
+                receiveSize = 0;
             }
         }
     }
